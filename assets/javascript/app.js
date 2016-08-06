@@ -4,31 +4,48 @@ var queryURL;
 
 $(document).ready(function(){
 
-	
 	//creating initial buttons for the topic, attributing data to it, and pushing it into the html
-	for (var i = 0; i < topics.length; i++){
-		var b = $('<button>');
-		b.text(topics[i]).attr('data-name', topics[i]);
-		b.addClass('buttons');
-		$('.button-div').prepend(b);
-		}
-	
-	function createButton(word){
+	// for (var i = 0; i < topics.length; i++){
+	// 	var b = $('<button>');
+	// 	b.text(topics[i]).attr('data-name', topics[i]);
+	// 	b.addClass('buttons');
+	// 	$('.button-div').prepend(b);
+	// 	}
 
-		var elem = $('<button>');
-		elem.text(word).attr('data-name', word);
-		elem.addClass('buttons');
-		$('.button-div').prepend(elem);
+	function createButtons(array){
+		for (var i = 0; i < array.length; i++){
+			var b = $('<button>');
+			b.text(array[i]).attr('data-name', array[i]);
+			b.addClass('buttons');
+			$('.button-div').prepend(b);
+			}
+			//.on click
+			runOnClick();
+	}
+	createButtons(topics);
+
+	function addToArray(word){
+		topics.push(word);
+		// var elem = $('<button>');
+		// elem.text(word).attr('data-name', word);
+		// elem.addClass('buttons');
+		// $('.button-div').prepend(elem);
+		$('.button-div').empty();
+		$('#textbox').val(""); //clears the input text box after submitting
+		// createButtons(topics);
 	}
 
-	
 	$('form').submit(function() {
-		var userWord = $('#textbox').val();
-		topics.push(userWord);
-		console.log("does this work?: " + userWord);
-		createButton(userWord);
+		var userWord = $('#textbox').val().trim();
+		// topics.push(userWord);
+		// console.log("does this work?: " + userWord);
+		addToArray(userWord);
+		createButtons(topics);
+		return false;
 	});
 
+//PUT THIS INTO A FUNCTION
+	function runOnClick() {
 	$('.buttons').on('click', function() {
 		var selected = $(this).attr('data-name');
 		queryURL = "http://api.giphy.com/v1/gifs/search?q=" + selected + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -57,7 +74,7 @@ $(document).ready(function(){
 					$('.gif-div').prepend(gif);
 				}
 
-	$('.test').on('click', function() {
+			$('.test').on('click', function() {
 				var state = $(this).attr('data-state');
 				console.log("state: " + state);
 
@@ -72,21 +89,13 @@ $(document).ready(function(){
 					$(this).attr('src', $(this).attr('data-still'));
 					$(this).attr('data-state', "still");
 				}
-	});
-			
 			});	
+		});	
 	});
-
-	function createButton(userWord){
-		//converts what user typed into a button
-		//appends it to the existing buttons, 
-	}
+}
 	function convertSpaces(word) {
 		//word.replace(“ “, “+”)
 		//return word;
 		//so when you call this, do var blah[i] = convertSpaces(blah[i]);
 	}
-
-
-
 });
