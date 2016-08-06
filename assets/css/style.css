@@ -1,0 +1,44 @@
+.gifs {
+	display: inline;
+	float: left;
+}
+
+.eachGif {
+	/*display: inline;*/
+	float: left;
+	position: relative;
+	border: 1px solid black;
+}
+.gif-div{
+	border: 1px solid black;
+	width: 70%;
+	margin: 10px;
+	float: left;
+
+
+}
+.input-box {
+	border: 1px solid black;
+
+	width: 20%;
+	display: inline-block;
+	float: right;
+	height: 300px;
+	margin: 10px;
+}
+button {
+	margin: 10px;
+}
+img {
+	margin: 5px 10px 10px 10px;
+}
+p {
+	margin: 10px 10px 5px 10px;
+}
+#textbox {
+	width: 500px
+}
+
+input {
+	margin: 10px;
+}
