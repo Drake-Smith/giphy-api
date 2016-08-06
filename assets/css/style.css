@@ -24,6 +24,10 @@
 	float: right;
 	height: 150px;
 	margin: 10px;*/
+	display: inline-block;
+}
+.instructions {
+		display: inline-block;
 }
 button {
 	margin: 10px;
