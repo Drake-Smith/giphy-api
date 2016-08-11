@@ -5,7 +5,7 @@ var queryURL;
 $(document).ready(function(){
 
 	createButtons(topics); //this is the initial setup of buttons using createButtons function below
-	// runOnClick(); //animates gif
+	runOnClick(); //animates gif
 
 	//function that will create buttons from the topics array
 	function createButtons(array){
@@ -53,7 +53,7 @@ $(document).ready(function(){
 	function runOnClick() {
 		$('.buttons').on('click', function() {
 			var selected = $(this).attr('data-name'); //
-			queryURL = "http://api.giphy.com/v1/gifs/search?q=" + selected + "&api_key=dc6zaTOxFJmzC&limit=10";
+			queryURL = "https://api.giphy.com/v1/gifs/search?q=" + selected + "&api_key=dc6zaTOxFJmzC&limit=10";
 			console.log(queryURL);
 
 			$.ajax({	//calling the API
