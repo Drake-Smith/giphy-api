@@ -68,15 +68,22 @@ $(document).ready(function(){
 						var p = $('<p>').text('Rating: ' + results[i].rating);
 						var img = $('<img>');
 						img.addClass('data-manage');
-						img.attr('src', results[i].images.fixed_height_still.url); //accessing data from the giphy API object
-						img.attr('data-still', results[i].images.fixed_height_still.url);
-						img.attr('data-animate', results[i].images.fixed_height.url);
+						var still = results[i].images.fixed_height_still.url;
+						var animate = results[i].images.fixed_height.url;
+						img.attr('src', still); //accessing data from the giphy API object
+						img.attr('data-still', still);
+						img.attr('data-animate', animate);
 						img.attr('data-state', "still");
 						gif.append(p);
 						gif.append(img);
 						$('.gif-div').prepend(gif);
 					}
 
+					testing();
+			});	
+		});
+	}
+	function testing(){
 				//manages the changing of the gif from data-state still to animate or vice versa
 				$('.data-manage').on('click', function() {
 					var state = $(this).attr('data-state');
@@ -87,14 +94,11 @@ $(document).ready(function(){
 						$(this).attr('src', changeState);
 						$(this).attr('data-state', 'animate');
 					}
-
-					if (state !== "still") {
+					if (state === "animate") {
 						$(this).attr('src', $(this).attr('data-still'));
 						$(this).attr('data-state', "still");
 					}
 				});	
-			});	
-		});
 	}
 
 });
