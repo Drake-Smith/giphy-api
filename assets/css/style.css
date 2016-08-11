@@ -1,51 +1,38 @@
-.gifs {
-	display: inline;
-	float: left;
+body {
+	font-family: 'Open Sans', sans-serif;
 }
 
 .eachGif {
-	/*display: inline;*/
 	float: left;
 	position: relative;
-	border: 1px solid black;
 }
-.gif-div{
-	border: 1px solid black;
-	width: 100%;
-/*	margin: 10px;
-*/	float: left;
 
+.glyphicon {
+    font-size: 40px;
+}
 
-}
-.input-box {
-	border: 1px solid black;
-/*	width: 30%;
-	display: inline-block;
-	float: right;
-	height: 150px;
-	margin: 10px;*/
-	display: inline-block;
-}
-.instructions {
-		display: inline-block;
-}
 button {
 	margin: 10px;
 }
+
+.btn {
+	font-size: 18px;
+}
+
 img {
 	margin: 10px;
-
 }
+
 p {
-	margin: 10px 10px 5px 10px;
-
+	margin: 10px 10px 0 10px;
 }
 
+h1 {
+	font-size: 60px;
+	margin-bottom: 20px;
+}
 
-#textbox {
-/*	width: 100%;
-*/}
-
-input {
-/*	margin: 0 10px 10px 10px;
-*/}
+.form-group {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}

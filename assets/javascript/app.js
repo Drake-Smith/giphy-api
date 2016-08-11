@@ -1,96 +1,95 @@
-var topics = ["dog", "cat", "parrot", "elephant", "mouse", "eagle", "tiger", "gorilla", "ferret", "shark"];
+var topics = ["larry david", "pikachu", "kim jong un", "conan o'brien", "drake", "will ferrell", "USC", "nicholas cage", "prince"]; //initial buttons that are created
 
 var queryURL;
 
 $(document).ready(function(){
 
-	//creating initial buttons for the topic, attributing data to it, and pushing it into the html
-	// for (var i = 0; i < topics.length; i++){
-	// 	var b = $('<button>');
-	// 	b.text(topics[i]).attr('data-name', topics[i]);
-	// 	b.addClass('buttons');
-	// 	$('.button-div').prepend(b);
-	// 	}
+	createButtons(topics); //this is the initial setup of buttons using createButtons function below
+	// runOnClick(); //animates gif
 
+	//function that will create buttons from the topics array
 	function createButtons(array){
 		for (var i = 0; i < array.length; i++){
-			var b = $('<button>');
+			var b = $('<button class="btn btn-primary">');
 			b.text(array[i]).attr('data-name', convertToPlus(array[i]));
-			//b.text(convertToSpace(array[i])).attr('data-name', convertToSpace(array[i]));
-			
 			b.addClass('buttons');
-
-			$('.button-div').prepend(b);
-			}
-			//.on click
-			runOnClick();
+			$('.button-div').append(b);
+		}
+		runOnClick(); //animates/stops gifs when user clicks on gif
 	}
-	createButtons(topics);
-
+	
+	//this function adds the user inputted word into the topics array
 	function addToArray(word){
-		
 		topics.push(word);
-		
-		// var elem = $('<button>');
-		// elem.text(word).attr('data-name', word);
-		// elem.addClass('buttons');
-		// $('.button-div').prepend(elem);
 		$('.button-div').empty();
 		$('#textbox').val(""); //clears the input text box after submitting
-		// createButtons(topics);
 	}
 
-	$('form').submit(function() {
+	//converts any spaces in the word user typed in into "+" so that it will work in the API URL
+	function convertToPlus(word) {
+		var spaceString = " ";
+		var withoutSpaces = word.replace(spaceString, "+");
+		//console.log(withoutSpaces);
+		return withoutSpaces;
+	}
+	
+	//converts the "+" in between words back into space so that the "+" don't show on the screen when button created
+	function convertToSpace(word) {
+		var plusString = "+";
+		var withSpaces = word.replace(plusString, " ");
+		//console.log(withSpaces);
+		return withSpaces;
+	}
+
+	//when user hits submit, takes the word and creates a button from it
+	$('#form').submit(function() {
 		var userWord = $('#textbox').val().trim();
-		// topics.push(userWord);
-		// console.log("does this work?: " + userWord);
 		addToArray(userWord);
 		createButtons(topics);
 		return false;
 	});
 
-
+	//when user clicks on a gif it will either start or stop the animation
 	function runOnClick() {
 		$('.buttons').on('click', function() {
-			var selected = $(this).attr('data-name');
+			var selected = $(this).attr('data-name'); //
 			queryURL = "http://api.giphy.com/v1/gifs/search?q=" + selected + "&api_key=dc6zaTOxFJmzC&limit=10";
 			console.log(queryURL);
 
-			$.ajax({
+			$.ajax({	//calling the API
 					url: queryURL,
 					method: 'GET'
 				})
 				.done(function(response) {
 					var results = response.data;
 
+					//for loop that will create each gif, give it the proper data attributes, and prepend it to the screen
 					for (var i = 0; i < results.length; i++) {
-						var gif = $('<div class="eachGif">');
-
+						var gif = $('<div class="eachGif" title="Click on gif to start/stop animation">');
 						var p = $('<p>').text('Rating: ' + results[i].rating);
 						var img = $('<img>');
-						img.addClass('test');
-						img.attr('src', results[i].images.fixed_height_still.url);
+						img.addClass('data-manage');
+						img.attr('src', results[i].images.fixed_height_still.url); //accessing data from the giphy API object
 						img.attr('data-still', results[i].images.fixed_height_still.url);
 						img.attr('data-animate', results[i].images.fixed_height.url);
 						img.attr('data-state', "still");
-						// console.log(img);
 						gif.append(p);
 						gif.append(img);
 						$('.gif-div').prepend(gif);
 					}
 
-				$('.test').on('click', function() {
+				//manages the changing of the gif from data-state still to animate or vice versa
+				$('.data-manage').on('click', function() {
 					var state = $(this).attr('data-state');
-					console.log("state: " + state);
+					//console.log("state: " + state);
 
 					if (state === "still") {
 						var changeState = $(this).attr('data-animate');
 						$(this).attr('src', changeState);
 						$(this).attr('data-state', 'animate');
-
 					}
+
 					if (state !== "still") {
-						// changeState = $(this).attr('data-still');
 						$(this).attr('src', $(this).attr('data-still'));
 						$(this).attr('data-state', "still");
 					}
@@ -99,21 +98,4 @@ $(document).ready(function(){
 		});
 	}
 
-	function convertToPlus(word) {
-		var spaceString = " ";
-		//var withoutSpaces = word.replace(“ “, “+”);
-		var withoutSpaces = word.replace(spaceString, "+");
-		//console.log(withoutSpaces);
-		return withoutSpaces;
-
-		//return word;
-		//so when you call this, do var blah[i] = convertSpaces(blah[i]);
-	}
-	function convertToSpace(word) {
-		var plusString = "+";
-		//var withoutSpaces = word.replace(“ “, “+”);
-		var withSpaces = word.replace(plusString, " ");
-		console.log(withSpaces);
-		return withSpaces;
-	}
 });
