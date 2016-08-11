@@ -5,7 +5,6 @@ var queryURL;
 $(document).ready(function(){
 
 	createButtons(topics); //this is the initial setup of buttons using createButtons function below
-	runOnClick(); //animates gif
 
 	//function that will create buttons from the topics array
 	function createButtons(array){
