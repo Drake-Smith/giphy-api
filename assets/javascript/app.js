@@ -45,6 +45,7 @@ $(document).ready(function(){
 		var userWord = $('#textbox').val().trim();
 		addToArray(userWord);
 		createButtons(topics);
+		//createButton(userWord);
 		return false;
 	});
 
@@ -66,7 +67,22 @@ $(document).ready(function(){
 					for (var i = 0; i < results.length; i++) {
 						var gif = $('<div class="eachGif" title="Click on gif to start/stop animation">');
 						var p = $('<p>').text('Rating: ' + results[i].rating);
-						var img = $('<img>');
+						
+						var img = $('<img>').on('click', function() {
+							var state = $(this).attr('data-state');
+							//console.log("state: " + state);
+
+							if (state === "still") {
+								var changeState = $(this).attr('data-animate');
+								$(this).attr('src', changeState);
+								$(this).attr('data-state', 'animate');
+							}
+							if (state === "animate") {
+								$(this).attr('src', $(this).attr('data-still'));
+								$(this).attr('data-state', "still");
+							}
+						});	
+
 						img.addClass('data-manage');
 						var still = results[i].images.fixed_height_still.url;
 						var animate = results[i].images.fixed_height.url;
@@ -78,27 +94,7 @@ $(document).ready(function(){
 						gif.append(img);
 						$('.gif-div').prepend(gif);
 					}
-
-					testing();
 			});	
 		});
 	}
-	function testing(){
-				//manages the changing of the gif from data-state still to animate or vice versa
-				$('.data-manage').on('click', function() {
-					var state = $(this).attr('data-state');
-					//console.log("state: " + state);
-
-					if (state === "still") {
-						var changeState = $(this).attr('data-animate');
-						$(this).attr('src', changeState);
-						$(this).attr('data-state', 'animate');
-					}
-					if (state === "animate") {
-						$(this).attr('src', $(this).attr('data-still'));
-						$(this).attr('data-state', "still");
-					}
-				});	
-	}
-
 });
