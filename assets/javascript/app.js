@@ -1,4 +1,4 @@
-var topics = ["larry david", "pikachu", "happy", "conan o'brien", "drake", "will ferrell", "cat", "nicholas cage", "dog"]; //initial buttons that are created
+var topics = ["pikachu", "happy", "conan o'brien", "will ferrell", "cat", "funny", "dog", "crazy"]; //initial buttons that are created
 
 var queryURL;
 
@@ -63,7 +63,6 @@ $(document).ready(function() {
                     //for loop that will create each gif, give it the proper data attributes, and prepend it to the screen
                     for (var i = 0; i < results.length; i++) {
                         var gif = $('<div class="eachGif" title="Click on gif to start/stop animation">');
-                        var p = $('<p>').text('Rating: ' + results[i].rating);
 
                         var img = $('<img>').on('click', function() {
                             var state = $(this).attr('data-state');
@@ -87,7 +86,6 @@ $(document).ready(function() {
                         img.attr('data-still', still);
                         img.attr('data-animate', animate);
                         img.attr('data-state', "still");
-                        gif.append(p);
                         gif.append(img);
                         $('.gif-div').prepend(gif);
                     }

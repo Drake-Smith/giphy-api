@@ -1,5 +1,6 @@
 body {
 	font-family: 'Open Sans', sans-serif;
+	background-color: #181919;
 }
 
 .eachGif {
@@ -8,28 +9,36 @@ body {
 }
 
 .glyphicon {
-    font-size: 40px;
+    font-size: 60px;
 }
 
 button {
-	margin: 10px;
+	margin-right: 20px;
+	margin-top: 15px;
 }
 
 .btn {
 	font-size: 18px;
+	border-radius: 0;
+	background-color: #0da58e;
+	border-style: none;
+	padding: 15px 25px;
+}
+
+#submit {
+	color: white;
+	background-color: #e52d64;
+}
+
+#title {
+	color: white;
+	font-size: 80px;
+	margin: 60px 0px;
+	font-weight: bold;
 }
 
 img {
 	margin: 10px;
-}
-
-p {
-	margin: 10px 10px 0 10px;
-}
-
-h1 {
-	font-size: 60px;
-	margin-bottom: 20px;
 }
 
 .form-group {
